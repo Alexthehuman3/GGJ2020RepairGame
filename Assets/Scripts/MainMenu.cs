@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
     public GameObject Panel;
+    public GameController gc;
 
     public void PlayGame()
     {
@@ -22,6 +24,12 @@ public class MainMenu : MonoBehaviour
         Panel.SetActive(true);
     }
 
+    public void OpenAchievements()
+    {
+        Panel.SetActive(true);
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,5 +43,7 @@ public class MainMenu : MonoBehaviour
         {
             Panel.SetActive(false);
         }
+
+
     }
 }

@@ -32,7 +32,8 @@ public class objectTriggers : MonoBehaviour
 
     private void Update()
     {
-        if(inDialogue && (this.name == "Wrench" || this.name =="clock" || this.name == "lever"))
+        if(inDialogue && (this.name == "Wrench" || this.name =="clock" || this.name == "lever" || this.name == "wrenchSIGN" || this.name == "TrollSign" || this.name == "mapFragment1"||
+            this.name == "mapFragment2" || this.name == "mapFragment3" || this.name == "mapFragment4" || this.name == "GGJJukeBox"))
         {
             eContinue();
         }
@@ -46,37 +47,46 @@ public class objectTriggers : MonoBehaviour
             {
                 if (!gc.timeMoving && !gc.interactionEnabled)
                 {
-                    text.text = "The clock seems to be broken, but you can't interact with it yet...";
+                    text.text = "The clock seems to be broken, maybe there is a way to fix it...?";
                     textPanel.SetActive(true);
+                    Debug.Log("Coroutine started");
                     StartCoroutine(countDown(5));
                 }
                 if (!gc.timeMoving && gc.interactionEnabled)
                 {
-                    text.text = "You fixed the clock and it seems to be ticking away...";
+                    text.text = "You fixed the clock and suddenly the world is blessed with color and life as it ticks away.";
+                    gc.achievementText.text = "Clock?... of the Flowing Time";
+                    gc.achievementPanel.GetComponent<Animator>().Play("AchievementAnim");
                     textPanel.SetActive(true);
                     pausePlayer(true);
                     greyPanel.GetComponent<Animator>().SetBool("timeUnlocked", true);
-                    inDialogue = true;
                     gc.timeMoving = true;
+                    inDialogue = true;
                 }
             }
             if (this.gameObject.name == "Wrench")
             {
-                inDialogue = true;
+                gc.achievementText.text = "Re:build?";
+                gc.achievementPanel.GetComponent<Animator>().Play("AchievementAnim");
                 pausePlayer(true);
                 textPanel.SetActive(true);
                 text.text = "You can now repair and interact with objects! Press E to interact to the sign next to you!";
                 textContinue.gameObject.SetActive(true);
                 gc.interactionEnabled = true;
+                inDialogue = true;
             }
 
             if (this.gameObject.name == "GGJJukeBox")
             {
-                text.text = "You've obtained the Jukebox! You now have sound effects!";
+                text.text = "You've obtained the Jukebox! You now have Sound Effects!";
+                gc.achievementText.text = "C418 - Mutation";
+                gc.achievementPanel.GetComponent<Animator>().Play("AchievementAnim");
                 textPanel.SetActive(true);
                 inDialogue = true;
                 pausePlayer(true);
                 gc.sfxEnabled = true;
+                gc.sceneBGM.Play();
+                inDialogue = true;
             }
 
             if (this.gameObject.name == "lever")
@@ -85,18 +95,19 @@ public class objectTriggers : MonoBehaviour
                 {
                     text.text = "The lever won't budge... Maybe something could fix it?";
                     textPanel.SetActive(true);
+                    Debug.Log("Coroutine started");
                     StartCoroutine(countDown(5));
                 }
                 if(!gc.timeMoving && gc.interactionEnabled)
                 {
-                    text.text = "The lever doesn't seems to do anything when pulled...";
+                    text.text = "The lever doesn't seem to do anything when pulled...";
                     textPanel.SetActive(true);
                     inDialogue = true;
                     pausePlayer(true);
                 }
                 if(gc.timeMoving && gc.interactionEnabled && !gc.leverActivated)
                 {
-                    text.text = "The lever's activation made something that was floating in the sky to come down.";
+                    text.text = "Something has descended from the heavens as the lever's switched.";
                     textPanel.SetActive(true);
                     inDialogue = true;
                     pausePlayer(true);
@@ -115,10 +126,95 @@ public class objectTriggers : MonoBehaviour
                 }
                 if(gc.timeMoving)
                 {
-                    text.text = "You've found the Programmer's favourite snack!";
-                    textContinue.text = "The other developer disagrees!";
+                    inDialogue = true;
+                    gc.chocolateFound = true;
+                    gc.achievementText.text = "Oooh a secret!";
+                    gc.achievementPanel.GetComponent<Animator>().Play("AchievementAnim");
+                    pausePlayer(true);
                     textPanel.SetActive(true);
+                    text.text = "You've found the Programmer's favourite snack!";
+                    textContinue.text = "No you can't eat it!";
+                }
+            }
 
+            if (this.gameObject.name == "wrenchSIGN")
+            {
+                if(gc.interactionEnabled)
+                {
+                    pausePlayer(true);
+                    text.text = "A Gift from the Gods ->";
+                    textPanel.SetActive(true);
+                    inDialogue = true;
+                    
+                }
+            }
+
+            if (this.gameObject.name == "TrollSign")
+            {
+                if(gc.interactionEnabled)
+                {
+                    pausePlayer(true);
+                    text.text = "Well done, you've discovered nothing!";
+                    textPanel.SetActive(true);
+                    inDialogue = true;
+                }
+            }
+
+            if(this.gameObject.name == "PortalToL2")
+            {
+                if(gc.timeMoving)
+                {
+                    gc.achievementText.text = "I think I see hell";
+                    gc.achievementPanel.GetComponent<Animator>().Play("AchievementAnim");
+                    gc.portalEntered = true;
+                }
+            }
+
+
+            if(this.gameObject.name == "mapFragment1")
+            {
+                if(gc.timeMoving && gc.interactionEnabled)
+                {
+                    pausePlayer(true);
+                    text.text = "It seems, that what you found looks like a map fragment, you can't makeout what it says yet.";
+                    textPanel.SetActive(true);
+                    inDialogue = true;
+                    gc.mapFragment1Collected = true;
+                    gc.achievementText.text = "There's more?!";
+                    gc.achievementPanel.GetComponent<Animator>().Play("AchievementAnim");
+                    
+                }
+            }
+            if(this.gameObject.name == "mapFragment2" && gc.interactionEnabled)
+            {
+                if(gc.timeMoving)
+                {
+                    pausePlayer(true);
+                    text.text = "Another fragment, slowly you place the pieces together, and are able to see some sort of direction.";
+                    textPanel.SetActive(true);
+                    inDialogue = true;
+                    gc.mapFragment2Collected = true;
+                }
+            }
+            if(this.gameObject.name == "mapFragment3")
+            {
+                if(gc.timeMoving&& gc.interactionEnabled)
+                {
+                    
+                    pausePlayer(true);
+                    text.text = "The third fragment, with the 3 pieces together, you are able to identify where the last piece is.";
+                    textPanel.SetActive(true);
+                    inDialogue = true;
+                    gc.mapFragment3Collected = true;
+                }
+            }
+            if(this.gameObject.name == "mapFragment4")
+            {
+                if(gc.timeMoving && gc.interactionEnabled)
+                {
+                    gc.mapFragment4Collected = true;
+                    gc.achievementText.text = "The End...?";
+                    gc.achievementPanel.GetComponent<Animator>().Play("AchievementAnim");
                 }
             }
         }
@@ -132,16 +228,17 @@ public class objectTriggers : MonoBehaviour
 
     private void eContinue()
     {
-        if (Input.GetKey(KeyCode.E) && inDialogue == true)
+        if (Input.GetKeyDown(KeyCode.E) && inDialogue == true)
         {
             textPanel.SetActive(false);
             pausePlayer(false);
-            textContinue.text = "Press Enter to Continue...";
-            if(this.gameObject.name == "Wrench" || this.gameObject.name == "clock")
+            textContinue.text = "Press E to Continue...";
+            if(this.gameObject.name == "Wrench" || this.gameObject.name == "clock" || this.gameObject.name == "Chocolate" || this.name == "GGJJukeBox" || 
+                this.name == "mapFragment1" || this.name == "mapFragment2" || this.name == "mapFragment3" || this.name == "mapFragment4")
             {
                 Debug.Log("Object Destroyed");
                 Destroy(this.gameObject);
-
+                inDialogue = false;
             }
         }
     }
