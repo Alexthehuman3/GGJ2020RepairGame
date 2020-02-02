@@ -1,4 +1,7 @@
-random color by random color picker (webfx)
-sprite made in Piskel By Alex Wong
-Programming by Andrei Barlea
-Sound FX by BFXR and Andrei
+Random colour by Random colour picker (webFX) & Alex Wong.
+sprites made in Piskel By Alex Wong & Andrei Barlea.
+Programming by Andrei Barlea & Alex Wong.
+Sound FX by BFXR and Andrei Barlea.
+Cool level design by Andrei Barlea.
+Menu song by Rolemusic, track - The River.
+Gameplay music by Rolemusic, track - Omou Matsu

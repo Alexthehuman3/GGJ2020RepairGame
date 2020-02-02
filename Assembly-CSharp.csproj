@@ -63,13 +63,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\DeathScript.cs" />
+    <Compile Include="Assets\Scripts\elevatorScript.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GroundCheck.cs" />
+    <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\objectTriggers.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\VisionScript.cs" />
     <Compile Include="Assets\Scripts\zoneTriggers.cs" />
+    <None Include="Assets\Scripts\GreyScale.shader" />
     <None Include="Assets\credits.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/2020 GGJ - Untitled/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

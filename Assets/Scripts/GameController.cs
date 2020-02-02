@@ -7,10 +7,25 @@ public class GameController : MonoBehaviour
     //flags
     public bool interactionEnabled;
     public bool timeMoving;
-    // Start is called before the first frame update
+    public bool sfxEnabled;
+    public bool leverActivated;
+
+    public Animator platformAnim;
+
     void Start()
     {
         interactionEnabled = false;
         timeMoving = false;
+        sfxEnabled = false;
+        leverActivated = false;
+        platformAnim.enabled = !platformAnim.enabled;
+    }
+
+    private void Update()
+    {
+        if (leverActivated)
+        {
+            platformAnim.enabled = true;
+        }
     }
 }
